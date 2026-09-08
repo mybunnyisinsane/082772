@@ -1,0 +1,11 @@
+Latin II synchronization audit
+
+Source: Latin II Master List — Unit Order (Revised), which states that Part I contains the Latin I master sections unchanged and Part II contains additional Latin II vocabulary.
+
+Changes:
+- Latin II student practice: Inherited Latin I scope now uses revised Latin I unit headings/order (VI.1–VIII.7).
+- Scope selector now repopulates the topic selector appropriately.
+- Cumulative scope uses all Latin I + Latin II vocabulary without a mismatched topic filter.
+- 10-word sets are generated from authoritative source order.
+- Teacher projection quiz: Latin II now includes revised Latin I units as “Latin I Review — …” topics, followed by existing Latin II extension topics.
+- Latin I, Latin III/IV, AP, reporting endpoint, and elapsed-time reporting are otherwise unchanged.
