@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unmasking Vergil</title>
+  <style>
+    :root{--ink:#17213a;--navy:#223259;--gold:#e2a93b;--paper:#fbfaf5;--blue:#e8eef8;--green:#16705a;--red:#a43838;--muted:#667085}
+    *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+    header{background:var(--navy);color:white;padding:18px 24px;border-bottom:5px solid var(--gold)}
+    header div,main{max-width:1050px;margin:auto} h1{font-family:Georgia,serif;font-size:clamp(1.5rem,4vw,2.25rem);margin:0} header p{margin:.25rem 0 0;color:#dce4f4}
+    main{padding:24px;display:grid;grid-template-columns:220px minmax(0,1.45fr) minmax(270px,.8fr);gap:18px}
+    .card{background:white;border:1px solid #d9deea;border-radius:14px;box-shadow:0 5px 18px #1c294412;padding:22px}
+    h2,h3{font-family:Georgia,serif;margin-top:0}.passage{font:1.18rem/1.9 Georgia,serif;background:#f4f0e5;border-left:5px solid var(--gold);padding:17px 20px;border-radius:4px}
+    .line{display:block}.word{border:0;background:transparent;font:inherit;color:inherit;padding:0 2px;border-radius:4px;cursor:pointer}.word:hover,.word:focus{background:#ffeab9;outline:2px solid #b47c13}.word.active{background:#ffd875}
+    .steps{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}.step{font-size:.85rem;padding:5px 10px;border-radius:99px;background:#e8ebf1;color:#525b6c}.step.on{background:var(--navy);color:white}
+    fieldset{border:0;padding:0;margin:18px 0}legend{font-weight:700;margin-bottom:9px}.choice{display:block;border:1px solid #ccd3df;border-radius:9px;padding:10px 12px;margin:8px 0;cursor:pointer}.choice:hover{border-color:#7787a8;background:#f5f7fb}.choice input{margin-right:9px}
+    button.action{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:11px 18px;font-weight:700;cursor:pointer}button.action:disabled{opacity:.45}.feedback{margin-top:14px;padding:13px;border-radius:9px;display:none}.feedback.good{display:block;background:#e4f4ee;color:#0e5a47}.feedback.try{display:block;background:#faece9;color:#7c2929}.hint{background:transparent;border:1px solid #7e8ba5;color:var(--navy);border-radius:8px;padding:10px 14px;margin-left:7px;cursor:pointer}
+    .side h3{margin-bottom:7px}.side ul{padding-left:20px;margin-top:5px}.note{border-top:1px solid #d9deea;margin-top:18px;padding-top:18px}.tag{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}.contract{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;text-align:center;font:1.15rem Georgia,serif;margin:12px 0}.contract span{background:var(--blue);padding:9px;border-radius:7px}.hidden{display:none}.complete{color:var(--green);font-weight:800}
+    .passage-nav{padding:16px}.passage-nav h2{font-size:1.15rem;margin-bottom:4px}.passage-nav p{font-size:.88rem;color:var(--muted);margin-top:0}.passage-link{display:block;width:100%;text-align:left;border:1px solid #cbd3e1;background:#fff;padding:12px;margin-top:10px;border-radius:9px;color:var(--navy);cursor:pointer;font-weight:750}.passage-link[aria-current="true"]{background:var(--navy);color:white;border-color:var(--navy)}.passage-link small{display:block;font-weight:500;opacity:.8;margin-top:2px}
+    @media(max-width:900px){main{grid-template-columns:190px 1fr}.side{grid-column:1/-1}}@media(max-width:650px){main{grid-template-columns:1fr;padding:14px}.passage-nav,.side{grid-row:auto}.passage-nav{display:flex;gap:10px;align-items:center;overflow-x:auto}.passage-nav h2,.passage-nav p{display:none}.passage-link{min-width:170px;margin:0}.card{padding:17px}.passage{font-size:1.05rem;padding:14px}.contract{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<header><div><h1>Unmasking Vergil</h1><p>A one-passage practice model · Aeneid 4.331–336</p></div></header>
+<main>
+  <nav class="card passage-nav" aria-label="Choose a passage">
+    <h2>Passages</h2><p>Choose by Vergil’s line numbers.</p>
+    <button class="passage-link" aria-current="true" data-passage="4331">Aeneid 4.331–336<small>Aeneas answers Dido</small></button>
+  </nav>
+  <section class="card">
+    <div class="steps"><span class="step on" id="s1">1 · Notice</span><span class="step" id="s2">2 · Recover</span><span class="step" id="s3">3 · Explain</span></div>
+    <div class="tag">Aeneid 4.331–336</div><h2>Read first for anchors</h2>
+    <p>Click any underlined-looking word you recognize. Then answer the question below. Do not translate every word yet.</p>
+    <div class="passage" aria-label="Latin passage">
+      <span class="line">Dīxerat. Ille Jovis monitīs immōta tenēbat</span>
+      <span class="line"><button class="word" data-note="lūmina: literally ‘lights’; here, the eyes">lūmina</button> et obnīxus <button class="word" data-note="cūram premēbat: he pressed down or suppressed his concern">cūram</button> sub corde <button class="word" data-note="premēbat: he was pressing down, concealing">premēbat</button>.</span>
+      <span class="line">Tandem pauca refert: “Ego tē, quae plūrima <button class="word" data-note="fandō: by speaking; a compressed gerund construction">fandō</button></span>
+      <span class="line">ēnumerāre valēs, numquam, rēgīna, negābō</span>
+      <span class="line">prōmeritam, nec mē meminisse pigēbit <button class="word" data-note="Elissae: Elissa is another, elevated name for Dido">Elissae</button></span>
+      <span class="line">dum memor ipse meī, dum spīritus hōs regit artūs.”</span>
+    </div>
+    <p id="wordNote" aria-live="polite" style="min-height:1.6em;color:var(--navy);font-weight:650"></p>
+    <fieldset><legend>What ordinary Latin idea lies beneath <em>lūmina</em> here?</legend>
+      <label class="choice"><input type="radio" name="q" value="a"> flammae — flames</label>
+      <label class="choice"><input type="radio" name="q" value="b"> oculī — eyes</label>
+      <label class="choice"><input type="radio" name="q" value="c"> sīdera — stars</label>
+    </fieldset>
+    <button class="action" id="check">Check my thinking</button><button class="hint" id="hint">Show one clue</button>
+    <div id="feedback" class="feedback" aria-live="polite"></div>
+    <div id="next" class="hidden">
+      <fieldset><legend>Which transformation is Vergil using?</legend>
+        <label class="choice"><input type="radio" name="q2" value="a"> Elevated synonym / metaphorical expression</label>
+        <label class="choice"><input type="radio" name="q2" value="b"> Omission of a verb</label>
+        <label class="choice"><input type="radio" name="q2" value="c"> Poetic contraction inside a word</label>
+      </fieldset>
+      <button class="action" id="check2">Check and finish</button><div id="feedback2" class="feedback" aria-live="polite"></div>
+    </div>
+  </section>
+  <aside class="card side">
+    <div class="tag">Reference table</div><h3>Transformations to look for</h3>
+    <ul><li>Elevated synonym</li><li>Poetic name or epithet</li><li>Metaphor or image</li><li>Compression</li><li>Participial phrasing</li><li>Omission (ellipsis)</li><li>Separated word groups</li><li>Poetic or alternate forms</li></ul>
+    <div class="note"><div class="tag">New distinction</div><h3>Dropped sounds and letters</h3>
+      <p><strong>Poetic contraction</strong> shortens a word’s written form:</p><div class="contract"><span>vincula</span><b>→</b><span>vincla</span></div>
+      <p><strong>Elision</strong> happens between words in recitation: a final vowel (or vowel + <em>m</em>) is not fully sounded before a following vowel or <em>h</em>.</p>
+      <p style="color:var(--muted)">Both can make familiar vocabulary look or sound unfamiliar—but they are not the same process.</p>
+    </div>
+  </aside>
+</main>
+<script>
+const note=document.querySelector('#wordNote');document.querySelectorAll('.word').forEach(w=>w.addEventListener('click',()=>{document.querySelectorAll('.word').forEach(x=>x.classList.remove('active'));w.classList.add('active');note.textContent=w.dataset.note}));
+const fb=document.querySelector('#feedback');document.querySelector('#hint').onclick=()=>{fb.className='feedback try';fb.textContent='Clue: immōta lūmina tenēbat describes Aeneas keeping part of his face motionless.'};
+document.querySelector('#check').onclick=()=>{const v=document.querySelector('input[name=q]:checked')?.value;if(!v){fb.className='feedback try';fb.textContent='Choose an answer first.';return}if(v==='b'){fb.className='feedback good';fb.innerHTML='<strong>Yes.</strong> <em>Lūmina</em> (“lights”) is an elevated poetic way to say <em>oculī</em> (“eyes”). The accusative plural also fits what Aeneas “held motionless.”';document.querySelector('#next').classList.remove('hidden');document.querySelector('#s1').classList.remove('on');document.querySelector('#s2').classList.add('on')}else{fb.className='feedback try';fb.textContent='Not yet. Use both meaning and grammar: what accusative plural object could Aeneas keep motionless?'}};
+const fb2=document.querySelector('#feedback2');document.querySelector('#check2').onclick=()=>{const v=document.querySelector('input[name=q2]:checked')?.value;if(v==='a'){fb2.className='feedback good';fb2.innerHTML='<span class="complete">Model complete.</span> Vergil substitutes a vivid, elevated expression for an ordinary body-part word. You recovered familiar Latin without translating linearly.';document.querySelector('#s2').classList.remove('on');document.querySelector('#s3').classList.add('on')}else{fb2.className='feedback try';fb2.textContent=v?'Try again: no verb is missing here, and lūmina is not a shortened spelling.':'Choose a transformation first.'}};
+</script>
+</body></html>
