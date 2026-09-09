@@ -1,0 +1,14 @@
+Latin Forms Practice v10 set/order audit
+
+Latin I: 230
+Latin II new: 238
+Latin III unit-tagged: 176
+RG core/practice: (55, 97)
+Vergil core/practice: (45, 67)
+Pliny core/practice: (60, 109)
+
+Membership/order-map issues:
+NONE
+
+
+Groups are generated in source order in chunks of 10; final chunks retain the exact remainder.
