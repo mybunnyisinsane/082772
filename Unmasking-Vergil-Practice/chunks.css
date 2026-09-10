@@ -1,0 +1,6 @@
+.chunk-label { margin-top: 12px; color: var(--muted); font-size: .88rem; font-weight: 700; }
+.chunk-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
+.chunk-link { border: 1px solid #9ca8bd; background: #fff; color: var(--navy); border-radius: 999px; padding: 7px 12px; cursor: pointer; font-weight: 750; }
+.chunk-link[aria-current="true"] { background: var(--gold); border-color: #b98217; color: #17213a; }
+.side ol { padding-left: 24px; }
+@media (max-width: 650px) { .chunk-nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .chunk-link { white-space: nowrap; } }
