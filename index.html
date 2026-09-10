@@ -19,6 +19,7 @@ h1{font-family:Georgia,serif;font-size:clamp(2.5rem,7vw,4.4rem);margin:0 0 12px;
 .card h2{font-family:Georgia,serif;font-size:2rem;margin:0 0 12px}
 .card p{color:var(--muted);line-height:1.55;margin:0}
 .path{margin-top:22px;font-size:.9rem;color:var(--accent);font-weight:700}
+.card.vergil{grid-column:1/-1;min-height:0;background:#24345c;color:#fff;border-color:#24345c}.card.vergil .kicker,.card.vergil .path{color:#f0bd55}.card.vergil p{color:#dce4f4}
 footer{margin-top:38px;text-align:center;color:var(--muted);font-size:.92rem}
 @media(max-width:650px){main{padding-top:48px}.grid{grid-template-columns:1fr}.card{min-height:0}}
 </style>
@@ -27,7 +28,7 @@ footer{margin-top:38px;text-align:center;color:var(--muted);font-size:.92rem}
 <main>
   <header>
     <h1>Latin Tools</h1>
-    <div class="subtitle">Choose vocabulary practice, the teacher quizzer, or the AP Aeneid summer-reading practice.</div>
+    <div class="subtitle">Choose the student practice site or the teacher projection quizzer.</div>
   </header>
   <section class="grid">
     <a class="card" href="./practice/">
@@ -42,11 +43,11 @@ footer{margin-top:38px;text-align:center;color:var(--muted);font-size:.92rem}
       <p>Teacher projection tool for generating inflected forms from the same audited vocabulary sets.</p>
       <div class="path">Open quizzer →</div>
     </a>
-    <a class="card" href="./Unmasking-Vergil-Practice/">
-      <div class="kicker">AP Latin</div>
+    <a class="card vergil" href="./Unmasking-Vergil-Practice/">
+      <div class="kicker">Reading skills</div>
       <h2>Unmasking Vergil</h2>
-      <p>Aeneid summer-reading practice for recognizing the ordinary Latin beneath Vergil's poetic language.</p>
-      <div class="path">Open Aeneid practice →</div>
+      <p>Practice recovering familiar Latin beneath Vergil’s elevated vocabulary, compression, rearrangement, and poetic forms.</p>
+      <div class="path">Open Vergil practice →</div>
     </a>
   </section>
   <footer>Poly Latin tools</footer>
