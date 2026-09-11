@@ -1,0 +1,31 @@
+Latin Forms Quizzer v7 — All-section audit
+
+Problem found
+- The quizzer limited Questions to max 10.
+- Every course/topic was subdivided into fixed chunks of 10, with no whole-section option.
+- Therefore any section/list longer than 10 could not be tested as a complete section.
+
+Latin III/IV affected sections
+- Historia Celata: 27 words
+- Mostellaria: 30 words
+- Hannibal: 42 words
+- Catullus: 24 words
+- Sallust: 64 words
+All five were affected.
+
+Other affected quizzer areas
+- Latin I units longer than 10 words
+- Latin II inherited Latin I units longer than 10 words
+- Latin II extension topics longer than 10 words
+- AP Core/Mastery lists longer than 10 words
+
+Fix
+- Added "All words in section (N)" for Latin I/II/III-IV.
+- Added "All Core words (N)" / "All Mastery words (N)" for AP.
+- Preserved 10-word set options.
+- Questions maximum now dynamically matches the selected pool size instead of being capped at 10.
+- Fixed Latin III/IV topic order to Historia Celata, Mostellaria, Hannibal, Catullus, Sallust.
+- Default remains Set 1 so the established 10-word workflow is unchanged unless "All" is chosen.
+
+Validation
+- JavaScript syntax checked with node --check.
