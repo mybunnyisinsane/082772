@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Six-form Latin verb conjugation practice organized by course level.">
+  <title>Latin Conjugation Practice</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-mark">VI</div>
+    <div>
+      <p class="eyebrow">Latin verb laboratory</p>
+      <h1>Conjugation Practice</h1>
+    </div>
+    <div class="mode-switch" role="group" aria-label="Display mode">
+      <button id="keyMode" type="button">Key</button>
+      <button id="practiceMode" class="active" type="button">Practice</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel controls">
+      <div class="section-heading">
+        <span>I</span>
+        <div><h2>Choose the verb</h2><p>Use the same course-level collections as the synopsis key.</p></div>
+      </div>
+      <div class="control-grid">
+        <label>Course level<select id="level"></select></label>
+        <label>Verb category
+          <select id="category">
+            <option value="all">All verbs</option>
+            <option value="regular">Regular verbs</option>
+            <option value="irregular">Irregular verbs</option>
+            <option value="compound">Compound irregulars</option>
+            <option value="deponent">Deponent verbs</option>
+          </select>
+        </label>
+        <label>Verb<select id="verb"></select></label>
+        <button id="randomVerb" class="secondary" type="button">Choose a random verb</button>
+      </div>
+
+      <article class="verb-card">
+        <p id="levelLabel"></p>
+        <h3 id="principalParts"></h3>
+        <p id="meaning"></p>
+      </article>
+    </section>
+
+    <section class="panel controls">
+      <div class="section-heading">
+        <span>II</span>
+        <div><h2>Choose the paradigm</h2><p>Unavailable combinations are removed automatically.</p></div>
+      </div>
+      <div class="control-grid three">
+        <label>Mood
+          <select id="mood">
+            <option value="indicative">Indicative</option>
+            <option value="subjunctive">Subjunctive</option>
+          </select>
+        </label>
+        <label>Tense<select id="tense"></select></label>
+        <label>Voice<select id="voice"></select></label>
+      </div>
+    </section>
+
+    <section class="panel exercise">
+      <div class="exercise-head">
+        <div class="section-heading compact">
+          <span>III</span>
+          <div><h2>Conjugate all six forms</h2><p id="paradigmName"></p></div>
+        </div>
+        <p class="macron-note">Macrons are displayed but never required.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Person</th><th>Singular</th><th>Plural</th></tr></thead>
+          <tbody>
+            <tr><th>1st person</th><td data-form="0"></td><td data-form="3"></td></tr>
+            <tr><th>2nd person</th><td data-form="1"></td><td data-form="4"></td></tr>
+            <tr><th>3rd person</th><td data-form="2"></td><td data-form="5"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="summary" class="summary hidden" aria-live="polite"></div>
+      <div class="actions">
+        <button id="check" class="primary" type="button">Check answers</button>
+        <button id="clear" class="secondary" type="button">Try again</button>
+        <button id="reveal" class="secondary" type="button">Reveal answers</button>
+        <button id="newVerb" class="secondary" type="button">New verb</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>Forms and vocabulary follow the existing Latin synopsis collections.</footer>
+  <script src="verbs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
