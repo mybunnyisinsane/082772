@@ -1,0 +1,11 @@
+.chunk-label { margin-top: 12px; color: var(--muted); font-size: .88rem; font-weight: 700; }
+.chunk-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
+.chunk-link { border: 1px solid #9ca8bd; background: #fff; color: var(--navy); border-radius: 999px; padding: 7px 12px; cursor: pointer; font-weight: 750; }
+.chunk-link[aria-current="true"] { background: var(--gold); border-color: #b98217; color: #17213a; }
+.side ol { padding-left: 24px; }
+.line { display: grid; grid-template-columns: 3.1rem 1fr; column-gap: .75rem; }
+.line-number { color: #786f5f; font: 700 .78rem/2.35 system-ui, sans-serif; text-align: right; user-select: none; }
+.learning-path { display: flex; gap: 8px; margin-top: 18px; }
+.learning-path span { flex: 1; border: 1px solid #cbd3e1; border-radius: 8px; padding: 6px 8px; color: var(--muted); font-size: .78rem; font-weight: 750; text-align: center; }
+.learning-path span.active { background: #fff1c9; border-color: #d39a2d; color: var(--ink); }
+@media (max-width: 650px) { .chunk-nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .chunk-link { white-space: nowrap; } }
