@@ -41,8 +41,14 @@ function render(){
     return;
   }
   const x=questions[q],stage=x.stage||1,stageNames={1:'Notice and unmask',2:'Rebuild the idea',3:'Name the transformation'};
+  // Rotate the displayed choices so the correct response is not predictably
+  // the first option. Each radio button retains its original choice index,
+  // so feedback and answer checking remain tied to the authored answer.
+  const offset=(current+chunkIndex+q)%x.choices.length;
+  const displayedChoices=x.choices.map((text,index)=>({text,index})).slice(offset)
+    .concat(x.choices.map((text,index)=>({text,index})).slice(0,offset));
   document.querySelectorAll('#learningPath span').forEach(s=>s.classList.toggle('active',+s.dataset.stage===stage));
-  $('#question').innerHTML=`<div class="kind">Step ${stage}: ${stageNames[stage]} · ${x.type} · Question ${q+1} of ${questions.length}</div><fieldset><legend>${x.prompt}</legend>${x.choices.map((v,i)=>`<label class="choice"><input type="radio" name="answer" value="${i}"> ${v}</label>`).join('')}</fieldset><button class="action" id="check">Check my thinking</button><button class="hint" id="hint">Show one clue</button><div id="feedback" aria-live="polite"></div>`;
+  $('#question').innerHTML=`<div class="kind">Step ${stage}: ${stageNames[stage]} · ${x.type} · Question ${q+1} of ${questions.length}</div><fieldset><legend>${x.prompt}</legend>${displayedChoices.map((choice,i)=>`<label class="choice"><input type="radio" name="answer" value="${choice.index}"> <strong>${String.fromCharCode(65+i)}.</strong> ${choice.text}</label>`).join('')}</fieldset><button class="action" id="check">Check my thinking</button><button class="hint" id="hint">Show one clue</button><div id="feedback" aria-live="polite"></div>`;
   $('#hint').onclick=()=>show(x.hint,'try');
   $('#check').onclick=()=>{
     const a=$('input[name=answer]:checked');
