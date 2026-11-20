@@ -55,9 +55,12 @@ function render(){
   const offset=(current+chunkIndex+q)%x.choices.length;
   const displayedChoices=x.choices.map((text,index)=>({text,index})).slice(offset)
     .concat(x.choices.map((text,index)=>({text,index})).slice(0,offset));
-  const prior=questions[q-1];
-  const latinReference=bookOne&&stage===2&&prior
-    ? `<div class="question-reference"><strong>Expression from the previous step</strong><span>${prior.prompt}</span></div>`
+  const priorPrompts=[];
+  if(bookOne&&stage===2){
+    for(let i=q-1;i>=0&&(questions[i].stage||1)===1;i--)priorPrompts.unshift(questions[i].prompt);
+  }
+  const latinReference=priorPrompts.length
+    ? `<div class="question-reference"><strong>${priorPrompts.length>1?'Expressions':'Expression'} from the previous step</strong>${priorPrompts.map(prompt=>`<span>${prompt}</span>`).join('')}</div>`
     : '';
   document.querySelectorAll('#learningPath span').forEach(s=>s.classList.toggle('active',+s.dataset.stage===stage));
   $('#question').innerHTML=`<div class="kind">Step ${stage}: ${stageNames[stage]} · ${x.type} · Question ${q+1} of ${questions.length}</div>${latinReference}<fieldset><legend>${x.prompt}</legend>${displayedChoices.map((choice,i)=>`<label class="choice"><input type="radio" name="answer" value="${choice.index}"> <strong>${String.fromCharCode(65+i)}.</strong> ${choice.text}</label>`).join('')}</fieldset><button class="action" id="check">Check my thinking</button><button class="hint" id="hint">Show one clue</button><div id="feedback" aria-live="polite"></div>`;
