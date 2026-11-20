@@ -1,7 +1,23 @@
 // Book I pilot: clear each local obstacle before reading the whole sense unit.
 const U=(prompt,choices,hint,feedback)=>({stage:1,type:'Unmask the expression',prompt,choices,answer:0,hint,feedback});
-const T=(kind,bridge)=>({stage:2,type:'Identify the transformation',prompt:'Which transformation best describes what Virgil has done here?',choices:[kind,...TRANSFORMATIONS.filter(x=>x!==kind).slice(0,2)],answer:0,hint:'Use the replacement you just made, then consult the reference table.',feedback:bridge});
+const BOOK1_DISTRACTORS={
+  'Elevated synonym':['Poetic name or epithet','Metaphor or image','Compression','Poetic or alternate forms'],
+  'Poetic name or epithet':['Elevated synonym','Omission (ellipsis)','Metaphor or image','Compression'],
+  'Metaphor or image':['Elevated synonym','Compression','Poetic name or epithet','Participial phrasing'],
+  'Compression':['Omission (ellipsis)','Participial phrasing','Metaphor or image','Separated word groups'],
+  'Participial phrasing':['Compression','Omission (ellipsis)','Separated word groups','Poetic or alternate forms'],
+  'Omission (ellipsis)':['Compression','Separated word groups','Participial phrasing','Poetic or alternate forms'],
+  'Separated word groups':['Omission (ellipsis)','Participial phrasing','Compression','Poetic or alternate forms'],
+  'Poetic or alternate forms':['Omission (ellipsis)','Separated word groups','Participial phrasing','Elevated synonym']
+};
+const BOOK1_DISTRACTOR_CURSOR={};
+const T=(kind,bridge)=>{
+  const pool=BOOK1_DISTRACTORS[kind],start=BOOK1_DISTRACTOR_CURSOR[kind]||0;
+  BOOK1_DISTRACTOR_CURSOR[kind]=start+2;
+  return {stage:2,type:'Identify the transformation',prompt:'Which transformation best describes what Virgil has done here?',choices:[kind,pool[start%pool.length],pool[(start+1)%pool.length]],answer:0,hint:'Use the replacement you just made, then distinguish it from the two plausible alternatives.',feedback:bridge};
+};
 const P=(prompt,choices,hint,feedback,kind,bridge)=>[U(prompt,choices,hint,feedback),T(kind,bridge)];
+const G=(items,kind,bridge)=>[...items.map(args=>U(...args)),T(kind,bridge)];
 const W=(prompt,choices,hint,feedback)=>({stage:3,type:'Read the whole idea',prompt,choices,answer:0,hint,feedback});
 const B=(cite,lines,parts,whole)=>({cite,lines,questions:[...parts.flat(),W(...whole)]});
 
@@ -25,8 +41,10 @@ P('Whom does rēgīna deum identify?',['Juno','Venus','Dido'],'The preceding lin
 ],['What does the poet ask the Muse?',['Why Juno drove a famously dutiful man through so many hardships','Why Aeneas refused to leave Carthage','Why the gods felt no anger toward Troy'],'Connect quō nūmine laesō, quidve dolēns, and impulerit.','The poet asks what offense or grief made Juno force dutiful Aeneas through so many disasters.']),
 
 B('1.12–16',[11,12,13,14,15],[
-P('What is the urbs antīqua finally named at the beginning of the next line?',['Carthage','Troy','Rome'],'Karthāgō renames urbs antīqua.','The ancient city is Carthage.','Separated word groups','Urbs antīqua … Karthāgō separates a noun from its delayed apposition.'),
-P('Which words mean that Juno valued Carthage even above Samos?',['posthabitā … Samō','dīves … bellī','Tiberīna … ōstia'],'Posthabēre means to place second.','Posthabitā Samō means “with Samos placed second.”','Separated word groups','Posthabitā … Samō is a natural ablative group interrupted by coluisse.')
+G([
+['What is the urbs antīqua finally named at the beginning of the next line?',['Carthage','Troy','Rome'],'Karthāgō renames urbs antīqua.','The ancient city is Carthage.'],
+['Which words mean that Juno valued Carthage even above Samos?',['posthabitā … Samō','dīves … bellī','Tiberīna … ōstia'],'Posthabēre means to place second.','Posthabitā Samō means “with Samos placed second.”']
+],'Separated word groups','Both obstacles have the same cause: urbs antīqua … Karthāgō delays an apposition, and posthabitā … Samō interrupts an ablative group. Both are separated word groups.')
 ],['What picture of Carthage emerges?',['A wealthy, warlike city loved by Juno above every other land','A weak Trojan settlement near Rome','A peaceful city Juno intends to abandon'],'Combine its location, wealth, military character, and Juno’s preference.','Carthage is distant from Italy, powerful in war, and uniquely favored by Juno.']),
 
 B('1.16–18',[15,16,17],[
@@ -52,27 +70,35 @@ P('What idea lies beneath Tantae mōlis erat Rōmānam condere gentem?',['Foundi
 
 'Aeneid 1.88–107':[
 B('1.88–91',[0,1,2,3],[
-P('What event lies beneath nūbēs caelumque diemque eripiunt ex oculīs?',['Clouds block the sailors’ view of sky and daylight','The sailors seize the sky','Daylight removes the clouds'],'Eripiunt makes darkness sound like violent seizure.','The clouds suddenly take sky and daylight from sight.','Metaphor or image','The loss of light is made vivid as an act of snatching away.'),
-P('What scene lies beneath pontō nox incubat atra?',['Black darkness settles over the sea','Night sails across the sea','The sea becomes calm'],'Incubāre literally means “lie upon.”','A black night lies heavily over the sea.','Metaphor or image','Darkness is made into a physical weight lying on the sea.'),
+G([
+['What event lies beneath nūbēs caelumque diemque eripiunt ex oculīs?',['Clouds block the sailors’ view of sky and daylight','The sailors seize the sky','Daylight removes the clouds'],'Eripiunt makes darkness sound like violent seizure.','The clouds suddenly take sky and daylight from sight.'],
+['What scene lies beneath pontō nox incubat atra?',['Black darkness settles over the sea','Night sails across the sea','The sea becomes calm'],'Incubāre literally means “lie upon.”','A black night lies heavily over the sea.']
+],'Metaphor or image','Both expressions make the storm physically aggressive: the clouds “snatch” away light, and night “lies” heavily on the sea. Both are metaphors or images.'),
 P('Which familiar form lies beneath intonuēre?',['intonuērunt','intonābunt','intonuerant'],'The subject is polī and the action is completed.','Intonuēre is intonuērunt.','Poetic or alternate forms','The poetic perfect ending -ēre appears in place of -ērunt.')
 ],['What happens to the Trojans?',['A storm removes light, fills the sky with thunder and lightning, and makes death seem immediate','A calm night lets them see the stars','They reach land before the clouds arrive'],'Combine eripiunt, incubat, intonuēre, micat, and mortem.','The storm abruptly overwhelms sight and sound until every sign threatens death.']),
 
 B('1.92–96',[4,5,6,7,8],[
-P('What does solvuntur frīgore membra express?',['Aeneas’ limbs go weak with fear','Aeneas calmly relaxes','Aeneas is warmed by courage'],'Frīgus can be the chill of terror.','Aeneas physically goes weak with fear.','Metaphor or image','Fear becomes a bodily chill that loosens Aeneas’ limbs.'),
+G([
+['What does solvuntur frīgore membra express?',['Aeneas’ limbs go weak with fear','Aeneas calmly relaxes','Aeneas is warmed by courage'],'Frīgus can be the chill of terror.','Aeneas physically goes weak with fear.'],
+['What idea does terque quaterque beātī intensify?',['Those who died at Troy were extraordinarily fortunate','Exactly seven men survived','The Trojans were fortunate to escape battle'],'The numbers intensify rather than count precisely.','Aeneas calls the dead many times blessed.']
+],'Metaphor or image','Both expressions heighten emotion through imagery: fear becomes a bodily chill, while numerical repetition makes the dead “three and four times blessed.”'),
 P('Which familiar form lies beneath duplicīs palmās?',['duplicēs palmās','duplicia palmā','duplicium palmārum'],'The adjective agrees with accusative plural palmās.','Duplicīs is duplicēs.','Poetic or alternate forms','The poetic accusative plural -īs appears in place of -ēs.'),
-P('What idea does terque quaterque beātī intensify?',['Those who died at Troy were extraordinarily fortunate','Exactly seven men survived','The Trojans were fortunate to escape battle'],'The numbers intensify rather than count precisely.','Aeneas calls the dead many times blessed.','Metaphor or image','The numerical repetition is a heightened, hyperbolic image.')
 ],['How does Aeneas react to the storm?',['He collapses in fear and envies those who died honorably at Troy','He confidently orders the fleet onward','He celebrates because the storm recalls Troy'],'Connect solvuntur membra with his exclamation about death at Troy.','Aeneas is terrified and wishes he had received an honorable death at Troy.']),
 
 B('1.96–101',[8,9,10,11,12,13],[
-P('Whom does Tȳdīde identify?',['Diomedes','Achilles','Hector'],'The ending means “son of Tydeus.”','Tȳdīde is Diomedes.','Poetic name or epithet','A patronymic—“son of Tydeus”—replaces Diomedes’ name.'),
-P('What place is meant by Īliacīs campīs?',['The fields of Troy','The plains of Italy','The countryside near Carthage'],'Īlium is another name for Troy.','The “Ilian fields” are Troy’s battlefield.','Poetic name or epithet','Īliacīs campīs → Trōiae. A poetic geographic name replaces the familiar one.'),
+G([
+['Whom does Tȳdīde identify?',['Diomedes','Achilles','Hector'],'The ending means “son of Tydeus.”','Tȳdīde is Diomedes.'],
+['What place is meant by Īliacīs campīs?',['The fields of Troy','The plains of Italy','The countryside near Carthage'],'Īlium is another name for Troy.','The “Ilian fields” are Troy’s battlefield.']
+],'Poetic name or epithet','Tȳdīde replaces Diomedes with a patronymic, while Īliacīs campīs replaces Troy with a poetic geographic name. Both are poetic names or epithets.'),
 P('What idea lies beneath animam hanc effundere dextrā?',['To kill me with your own hand','To pour a drink into my hand','To rescue my life'],'The object poured out is Aeneas’ life.','Aeneas wishes Diomedes had killed him.','Metaphor or image','Life is imagined as a liquid that can be poured out.')
 ],['What kind of death does Aeneas wish he had received?',['A heroic death at Troy among famous warriors','A peaceful death at Carthage','An anonymous death by drowning'],'Combine Tȳdīde, Īliacīs campīs, Hector, Sarpedon, and Simois.','Aeneas contrasts sea death with an honorable battlefield death at Troy.']),
 
 B('1.102–107',[14,15,16,17,18,19],[
 P('Who is understood with iactantī in Talia iactantī?',['Aeneas','The North Wind','Hector'],'The preceding speech belongs to Aeneas.','It means “while Aeneas was uttering such words.”','Omission (ellipsis)','Talia iactantī [Aeneae] omits a name recoverable from context.'),
-P('What event does fluctūs ad sīdera tollit intensify?',['The waves rise terrifyingly high','The stars fall into the sea','The ship reaches the sky'],'Ad sīdera exaggerates their height.','The storm raises enormous waves.','Metaphor or image','Waves rising “to the stars” is a hyperbolic image.'),
-P('What sight lies beneath praeruptus aquae mōns?',['A towering, steep wave','A mountain on shore','A pile of broken oars'],'The mountain is made of water.','A huge wall of water follows the ship.','Metaphor or image','Aquae mōns presents a wave as a steep mountain of water.')
+G([
+['What event does fluctūs ad sīdera tollit intensify?',['The waves rise terrifyingly high','The stars fall into the sea','The ship reaches the sky'],'Ad sīdera exaggerates their height.','The storm raises enormous waves.'],
+['What sight lies beneath praeruptus aquae mōns?',['A towering, steep wave','A mountain on shore','A pile of broken oars'],'The mountain is made of water.','A huge wall of water follows the ship.']
+],'Metaphor or image','Ad sīdera exaggerates the waves’ height, while aquae mōns turns a wave into a steep mountain. Both are metaphors or images.')
 ],['How does the fleet lose control?',['Wind strikes the sail, oars break, the ship turns broadside, and waves control the sailors','The sailors steer safely through calm water','Every sailor experiences the same gentle wave'],'Follow ferit, franguntur, avertit, and dat latus.','The ship’s equipment and orientation fail, leaving the sailors at the mercy of enormous waves.'])],
 
 'Aeneid 1.494–508':[
