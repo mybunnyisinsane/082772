@@ -25,7 +25,12 @@ function loadChunk(i){
   chunkNav();
   $('#citation').textContent=`${c.cite} · ${p.status}`;
   $('#title').textContent=p.title;
-  $('#instruction').textContent='Follow one complete idea: notice the Latin, rebuild the ordinary meaning, and only then name the transformation.';
+  const bookOne=p.cite.startsWith('Aeneid 1.');
+  $('#instruction').textContent=bookOne
+    ? 'Clear each difficult expression, identify its transformation, and only then read the whole sense unit.'
+    : 'Follow one complete idea: notice the Latin, rebuild the ordinary meaning, and only then name the transformation.';
+  const pathLabels=bookOne?['1 Unmask','2 Classify','3 Read whole']:['1 Notice','2 Rebuild','3 Name it'];
+  document.querySelectorAll('#learningPath span').forEach((s,n)=>s.textContent=pathLabels[n]);
   const firstLine=Number(p.cite.match(/Aeneid \d+\.(\d+)/)[1]);
   $('#passage').innerHTML=c.lines.map(n=>`<span class="line"><span class="line-number">${firstLine+n}</span><span>${p.lines[n]}</span></span>`).join('');
   render();
@@ -40,7 +45,10 @@ function render(){
     $('#again').onclick=()=>loadChunk(chunkIndex);
     return;
   }
-  const x=questions[q],stage=x.stage||1,stageNames={1:'Notice and unmask',2:'Rebuild the idea',3:'Name the transformation'};
+  const x=questions[q],stage=x.stage||1,bookOne=p.cite.startsWith('Aeneid 1.');
+  const stageNames=bookOne
+    ? {1:'Unmask the obstacle',2:'Classify the transformation',3:'Read the whole idea'}
+    : {1:'Notice and unmask',2:'Rebuild the idea',3:'Name the transformation'};
   // Rotate the displayed choices so the correct response is not predictably
   // the first option. Each radio button retains its original choice index,
   // so feedback and answer checking remain tied to the authored answer.
