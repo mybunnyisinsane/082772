@@ -26,7 +26,7 @@ function loadChunk(i){
   $('#citation').textContent=`${c.cite} · ${p.status}`;
   $('#title').textContent=p.title;
   $('#instruction').textContent='Follow one complete idea: notice the Latin, rebuild the ordinary meaning, and only then name the transformation.';
-  const firstLine=Number(p.cite.match(/4\.(\d+)/)[1]);
+  const firstLine=Number(p.cite.match(/Aeneid \d+\.(\d+)/)[1]);
   $('#passage').innerHTML=c.lines.map(n=>`<span class="line"><span class="line-number">${firstLine+n}</span><span>${p.lines[n]}</span></span>`).join('');
   render();
 }
