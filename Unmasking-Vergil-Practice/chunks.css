@@ -8,4 +8,7 @@
 .learning-path { display: flex; gap: 8px; margin-top: 18px; }
 .learning-path span { flex: 1; border: 1px solid #cbd3e1; border-radius: 8px; padding: 6px 8px; color: var(--muted); font-size: .78rem; font-weight: 750; text-align: center; }
 .learning-path span.active { background: #fff1c9; border-color: #d39a2d; color: var(--ink); }
+.question-reference { margin: .8rem 0 1rem; padding: .75rem .9rem; border-left: 4px solid var(--gold); background: #f7f3e8; border-radius: .35rem; }
+.question-reference strong { display: block; margin-bottom: .3rem; font-size: .76rem; text-transform: uppercase; letter-spacing: .04em; }
+.question-reference span { font-family: Georgia, 'Times New Roman', serif; }
 @media (max-width: 650px) { .chunk-nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; } .chunk-link { white-space: nowrap; } }
